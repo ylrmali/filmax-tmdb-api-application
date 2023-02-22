@@ -1,0 +1,76 @@
+
+
+
+
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'movie/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'movie/css/register.css' %}">
+
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card"  id="signup-content">
+            {% if error %}
+                <div class="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <div class="login-content">
+                <h3 class="title">sign up</h3>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="firstname">
+                            First Name:
+                            </label>
+                            <input type="text" name="firstname" id="firstname" required="required">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastname">
+                            Last Name:
+                            </label>
+                            <input type="text" name="lastname" id="lastname" required="required">
+                        </div>
+                    </div>
+
+                    <label for="username">
+                        Username:
+                    </label>
+                    <input type="text" name="username" id="username" placeholder="" required="required" />
+
+                    <label for="email">
+                        Email:
+                    </label>
+                    <input type="email" name="email" id="email" placeholder=""  required="required" />
+
+                    <label for="password">
+                        Password:
+                    </label>
+                    <input type="password" name="password" id="password" placeholder=""  required="required" />
+
+                    <label for="repassword">
+                       Re Password:
+                    </label>
+                    <input type="password" name="repassword" id="repassword" placeholder="" required="required" />
+
+                    <p class="registerLink">
+                            <a href="/user/login">Have you already an account?</a>
+                    </p>
+
+                    <button type="submit" class="btn bg-green">sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

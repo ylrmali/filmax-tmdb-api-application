@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<link rel="stylesheet" href="./static/movie/css/plugins.css">
+	<link rel="stylesheet" href="{% static 'movie/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'movie/css/movies.css' %}">
+    <title>Filmax | Movies</title>
+</head>
+<body>
+
+{% include 'movie/partials/_navbar.html' %}
+
+<div class="containerCustom">
+	<div >
+		<div  class="movies" style='display:flex;'>
+			{% for movie in movies %}
+				<div class="m-item">
+					<div class="mv-img">
+						<a href="#"><img src="https://image.tmdb.org/t/p/original/{{movie.poster_path}}" alt="" width="285" height="437"></a>
+					</div>
+					<div class="t-in">
+						<div class="cate">
+							<span class="blue"><a href="#">{{movie.original_language}}</a></span>
+						</div>
+						<h6 class='title'>{{movie.title}}</h6>
+						<p class='vote'><i class="ion-android-star"></i><span>{{movie.vote_average}}</span> /10</p>
+					</div>
+					<div class='m-overview'>
+						<h6 class='title'>{{movie.title}}</h6>
+						<p style='overflow: hidden'>{{movie.overview}}</p>
+					</div>
+				</div>	
+			{% endfor %}	
+		</div>
+	</div>
+</div>
+
+<div class='pages'>
+    <button class="directionBtn " id="previous" onclick="changePage(this.getAttribute('id'))"> < </button>
+    <div id="pages">
+        <!-- pages buttons will be here -->
+    </div>
+	<button class='directionBtn ' id="next" onclick="changePage(this.getAttribute('id'))"> > </button>
+</div>
+
+    
+
+<script src="https://kit.fontawesome.com/5bec9f942b.js" crossorigin="anonymous"></script>
+<script src="{% static 'movie/js/jquery.js' %}"></script>
+<script src="{% static 'movie/js/plugins.js' %}"></script>
+<script src="{% static 'movie/js/plugins2.js' %}"></script>
+<script src="{% static 'movie/js/custom.js' %}"></script>
+<script src="{% static 'movie/js/pageController.js' %}"></script>
+</body>
+</html>

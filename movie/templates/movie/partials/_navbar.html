@@ -1,0 +1,88 @@
+{% load static %}
+<!-- BEGIN | Header -->
+<header class="ht-header">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					    <span class="sr-only">Toggle navigation</span>
+					    <div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+				    </div>
+				    <a href="/"><img class="logo" src="{% static 'movie/img/logo.png' %}" alt="" width="119" height="58"></a>
+			    </div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav flex-child-menu menu-left">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+						<li class="dropdown first">
+							<a class="btn btn-default"  href='/' >
+							Home
+							</a>
+
+						</li>
+						<li class="dropdown first">
+							<a class="btn btn-default "  href='/movies?field=m&page=1'>
+							movies
+							</a>
+						</li>
+
+						<li class="dropdown first">
+							<a class="btn btn-default" href='/series?field=s&page=1' >
+							series
+							</a>
+						</li>
+                        <li class="dropdown first" >
+                            <a href="#" id="dropdown">Category</a>
+                            <div class="drop-menu" id="drop-menu">
+                                <a href="/movies/categories?type=m&page=1&category=action">Action</a>
+                                <a href="/movies/categories?type=m&page=1&category=comedy">Comedy</a>
+                                <a href="/movies/categories?type=m&page=1&category=drama">Drama</a>
+                                <a href="/movies/categories?type=m&page=1&category=crime">Crime</a>
+                            </div>
+                        </li>
+
+					</ul>
+
+                    {% if user.is_authenticated %}
+                    <!--  eğer kullanıcı giriş yaptıysa bu kısmı gösterir-->
+                        <div class="user">
+                            <p>{{ user.username }}</p>
+                            <form action="{% url 'logout' %}" method="POST" >
+                                {% csrf_token %}
+                                <button type="submit" class="logoutBtn">
+                                    logout
+                                </button>
+                            </form>
+                        </div>
+                    <!-- giriş yapılmadıysa bu kısım gösterilir-->
+                    {% else %}
+                        <ul class="nav navbar-nav flex-child-menu menu-right">
+                            <li class="loginBtn"><a href={% url 'login' %}>LOG In</a></li>
+                            <li class="btn registerBtn"><a href={% url 'register' %}>sign up</a></li>
+                        </ul>
+                    {% endif %}
+				</div>
+			<!-- /.navbar-collapse -->
+	    </nav>
+
+	    <!-- top search form -->
+	    <div class="top-search">
+            <form method="GET" style="width: 100%;">
+                <label for="search" style="display: none"></label>
+                <input type="text"  name="search" id="search" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
+                <button class="searchBtn" type="submit" >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+
+	    </div>
+	</div>
+</header>
+<!-- END | Header -->

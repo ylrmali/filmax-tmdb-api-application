@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    
+	<!-- Basic need -->
+	<title>Filmax | Home</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="./static/movie/css/plugins.css">
+	<link rel="stylesheet" href="{% static 'movie/css/style.css' %}">
+
+</head>
+<body>
+<!--preloading-->
+<div id="preloader">
+    <img class="logo" src="{% static 'movie/img/logo.png' %}" alt="" width="119" height="58">
+    <div id="status">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<!-- navbar'ın dahil edilmesi-->
+{% include 'movie/partials/_navbar.html' %}
+
+<!-- slayt seklinde gelen filmleri sergilediğimiz kısım -->
+<div class="slider movie-items">
+	<div class="container">
+		<div class="row">
+	    	<div  class="slick-multiItemSlider">
+				{% for data in datas %} <!-- bu kısımda datas movie-> views.py-> index func. icindeki context den gelen bilgilerdir. -->
+	    			<div class="movie-item">
+						<div class="mv-img">
+							<a href="#"><img src="https://image.tmdb.org/t/p/original/{{data.poster_path}}" alt="" width="285" height="437"></a>
+						</div>
+						<div class="title-in">
+							<div class="cate">
+								<span class="blue"><a href="#">{{data.original_language}}</a></span>
+							</div>
+							<h6><a href="#">{{data.title}}</a></h6>
+							<p><i class="ion-android-star"></i><span>{{data.vote_average}}</span> /10</p>
+						</div>
+						<div class='movie-overview'>
+							<h6 >{{data.title}}</h6>
+							<p style='overflow: hidden'>{{data.overview}}</p>
+						</div>
+					</div>
+	    			
+				{% endfor %}	
+	    	</div>
+	    </div>
+	</div>
+</div>
+
+<!-- movies kısmındaki film slaytının gösterimi -->
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="title-hd">
+					<h2>MOVIES</h2>
+					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#tab1">#Popular</a></li>
+						<li><a href="#tab2"> #Coming soon</a></li>
+						<li><a href="#tab3">  #Trending </a></li>                       
+					</ul>
+
+                    <!-- movies altındaki sekmeler -->
+				    <div class="tab-content">
+				        <div id="tab1" class="tab active">
+				            <div class="row">
+				            	<div class="slick-multiItem">
+									{% for t_rated in top_rated %}
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="https://image.tmdb.org/t/p/original/{{t_rated.poster_path}}" alt="" width="185" height="284">
+												</div> 
+												<div class="title-in">
+													<h6><a href="#">{{t_rated.title}}</a></h6>
+													<p><i class="ion-android-star"></i><span>{{t_rated.vote_average}}</span> /10</p>
+												</div>
+												<div class='card ' id='card'>
+													<h6 class='title'>{{t_rated.title}}</h6>
+													<h6>{{t_rated.overview}}</h6>
+												</div>
+											</div>
+										</div>
+									{% endfor %}	
+			
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab2" class="tab">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+									{% for c_soon in coming_soon%}
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="https://image.tmdb.org/t/p/original/{{c_soon.poster_path}}" alt="" width="185" height="284">
+												</div>
+												<div class='card ' id='card'>
+													<h6 class='title'>{{c_soon.title}}</h6>
+													<h6>{{c_soon.overview}}</h6>
+												</div>
+												<div class="title-in">
+													<h6><a href="#">{{c_soon.title}}}</a></h6>
+													<p><i class="ion-android-star"></i><span>{{c_soon.vote_average}}</span> /10</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab3" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+									{% for trendMovies in trend_movies%}
+				            			<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="https://image.tmdb.org/t/p/original/{{trendMovies.poster_path}}" alt="" width="185" height="284">
+												</div>
+												<div class='card ' id='card'>
+													<h6 class='title'>{{trendMovies.title}}</h6>
+													<h6>{{trendMovies.overview}}</h6>
+												</div>
+												<div class="title-in">
+													<h6><a href="#">{{trendMovies.title}}</a></h6>
+													<p><i class="ion-android-star"></i><span>{{trendMovies.vote_average}}</span> /10</p>
+												</div>
+											</div>
+				            			</div>
+									{% endfor %}	
+				            	</div>
+				            </div>
+			       	 	</div>
+				    </div>
+				</div>
+
+                <!-- dizilerin sergilendiği kısım -->
+				<div class="title-hd">
+					<h2>TV SHOWS</h2>
+					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+
+				<div class="tabs">
+					<ul class="tab-links-2">
+						<li class="active"><a href="#tab21">#Popular</a></li>
+						<li><a href="#tab22"> #Trending  </a></li>                    
+					</ul>
+				    <div class="tab-content">
+				        <div id="tab21" class="tab active">
+				            <div class="row">
+				            	<div class="slick-multiItem">
+									{% for top_tv in top_rated_tv%}
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="https://image.tmdb.org/t/p/original/{{top_tv.poster_path}}" alt="" width="185" height="284">
+												</div>
+												<div class='card ' id='card'>
+													<h6 class='title'>{{top_tv.title}}</h6>
+													<h6>{{top_tv.overview}}</h6>
+												</div>
+												<div class="title-in">
+													<h6><a href="#">{{top_tv.name}}</a></h6>
+													<p><i class="ion-android-star"></i><span>{{top_tv.vote_average}}</span> /10</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+									
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab22" class="tab ">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+									{% for trendshow in trend_tv %}
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="https://image.tmdb.org/t/p/original/{{trendshow.poster_path}}" alt="" width="185" height="284">
+												</div>
+												<div class='card ' id='card'>
+													<h6 class='title'>{{trendshow.title}}</h6>
+													<h6>{{trendshow.overview}}</h6>
+												</div>
+												<div class="title-in">
+													<h6><a href="#">{{trendshow.title}}</a></h6>
+													<p><i class="ion-android-star"></i><span>{{trendshow.vote_average}}</span> /10</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+				            	</div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+
+            <!-- imdb top 5 movies kısmı -->
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
+					</div>
+					<div class="celebrities">
+						<h4 class="sb-title">IMDB TOP 5 MOVIES</h4>
+						<div class="celeb-item">
+							<a href="#"><img src="{% static 'movie/img/uploads/shawshank.jpg' %}" alt="" styles='width: 100%;'></a>
+							<div class="celeb-author">
+								<h6><a href="#">The Shawshank Redemption </a></h6>
+								<span>Actor</span>
+							</div>
+						</div> 	
+						<div class="celeb-item">
+							<a href="#"><img src="{% static 'movie/img/uploads/godfather.jpg' %}" alt="" styles='width: 100%;'></a>
+							<div class="celeb-author">
+								<h6><a href="#">The Godfather</a></h6>
+								<span>Actor</span>
+							</div>
+						</div>
+						<div class="celeb-item">
+							<a href="#"><img src="{% static 'movie/img/uploads/dark kinght.jpg' %}" alt="" styles='width: 100%;'></a>
+							<div class="celeb-author">
+								<h6><a href="#">The Dark Knight</a></h6>
+								<span>Actor</span>
+							</div>
+						</div>
+						<div class="celeb-item">
+							<a href="#"><img src="{% static 'movie/img/uploads/godfather2.jpg' %}" alt="" styles='width: 100%;'></a>
+							<div class="celeb-author">
+								<h6><a href="#">The Godfather Part II</a></h6>
+								<span>Actor</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>  	 	
+		</div>
+	</div>
+</div>
+
+<!-- footer section-->
+<footer class="ht-footer">
+	<div class="cont" style="display: flex; justify-content: center;">
+        <div class="brand-footer" style="margin-top: 50px;display: flex;flex-direction: column;justify-content: center;gap: 20px;margin-bottom: 50px">
+            <img src={% static 'movie/img/logo.png' %} alt="logo">
+            <p>ylrmali1289@gmail.com</p>
+        </div>
+    </div>
+</footer>
+<!-- end of footer section-->
+
+
+<script>
+	const card = document.getElementById('card');
+
+	const showDetails = () =>{
+		card.classList.replace('hidden','show');
+	}
+</script>
+<script src="https://kit.fontawesome.com/5bec9f942b.js" crossorigin="anonymous"></script>
+<script src="{% static 'movie/js/jquery.js' %}"></script>
+<script src="{% static 'movie/js/plugins.js' %}"></script>
+<script src="{% static 'movie/js/plugins2.js' %}"></script>
+<script src="{% static 'movie/js/custom.js' %}"></script>
+</body>
+</html>
