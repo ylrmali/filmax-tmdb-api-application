@@ -3,6 +3,9 @@ filmax is a movie/series website working with tmdb apis and django.
 you can search movies, you can look popular movies and series.
 Also this website includes user authenticating system if you want, you can develop it.
 
+OVERVIEW
+filmax.pythonanywhere.com
+
 USAGE
 - Create an account. Then login your account.
 - You can see popular movies and series in homepage.
